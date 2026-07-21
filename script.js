@@ -1,6 +1,6 @@
 /*====================================================
-  WEBDESIGN STUDIO
-  Premium Apple x Porsche JavaScript
+   NOVELEA
+   Premium Website JavaScript
 ====================================================*/
 
 
@@ -13,11 +13,11 @@ const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
 
-    if(window.scrollY > 50){
+    if (window.scrollY > 50) {
 
         navbar.classList.add("scrolled");
 
-    }else{
+    } else {
 
         navbar.classList.remove("scrolled");
 
@@ -27,12 +27,12 @@ window.addEventListener("scroll", () => {
 
 
 
+
 // ================================
 // Smooth scrolling
 // ================================
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
-
 
     link.addEventListener("click", function(e){
 
@@ -45,7 +45,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
             e.preventDefault();
 
-
             target.scrollIntoView({
 
                 behavior:"smooth"
@@ -56,8 +55,8 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
     });
 
-
 });
+
 
 
 
@@ -66,20 +65,29 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // ================================
 
 
-const revealElements = document.querySelectorAll(
+const animatedElements = document.querySelectorAll(
+
     ".card, .stats div, .portfolio-item, .about, .cta, form"
+
 );
 
 
-revealElements.forEach(element => {
 
-    element.classList.add("fade-in");
+animatedElements.forEach(element => {
+
+    element.style.opacity = "0";
+
+    element.style.transform =
+    "translateY(40px)";
+
+    element.style.transition =
+    "all .8s ease";
 
 });
 
 
 
-const observer = new IntersectionObserver((entries)=>{
+const revealObserver = new IntersectionObserver((entries)=>{
 
 
     entries.forEach(entry=>{
@@ -88,7 +96,10 @@ const observer = new IntersectionObserver((entries)=>{
         if(entry.isIntersecting){
 
 
-            entry.target.classList.add("show");
+            entry.target.style.opacity="1";
+
+            entry.target.style.transform=
+            "translateY(0)";
 
 
         }
@@ -105,11 +116,12 @@ const observer = new IntersectionObserver((entries)=>{
 
 
 
-revealElements.forEach(element=>{
+animatedElements.forEach(element=>{
 
-    observer.observe(element);
+    revealObserver.observe(element);
 
 });
+
 
 
 
@@ -128,11 +140,13 @@ window.addEventListener("scroll",()=>{
     if(heroImage){
 
 
-        let scroll = window.scrollY;
+        const movement =
+        window.scrollY * 0.08;
 
 
         heroImage.style.transform =
-        `translateY(${scroll * 0.08}px)`;
+        `translateY(${movement}px)`;
+
 
     }
 
@@ -142,20 +156,23 @@ window.addEventListener("scroll",()=>{
 
 
 
+
 // ================================
-// Footer jaar automatisch
+// Footer automatisch jaartal
 // ================================
 
 
-const footerYear = document.querySelector("footer small");
+const footerYear =
+document.querySelector("footer small");
 
 
 if(footerYear){
 
 
     footerYear.textContent =
-    "© " + new Date().getFullYear() +
-    " WebDesign Studio";
+    "© " +
+    new Date().getFullYear() +
+    " Novelea";
 
 
 }
@@ -163,54 +180,25 @@ if(footerYear){
 
 
 
+
 // ================================
-// Luxe hover effect kaarten
+// Luxe kaart hover effect
 // ================================
 
 
-const cards = document.querySelectorAll(".card");
+const cards =
+document.querySelectorAll(".card");
+
 
 
 cards.forEach(card=>{
 
 
-    card.addEventListener("mousemove",(e)=>{
+    card.addEventListener("mouseenter",()=>{
 
 
-        const rect = card.getBoundingClientRect();
-
-
-        const x =
-        e.clientX - rect.left;
-
-
-        const y =
-        e.clientY - rect.top;
-
-
-
-        card.style.setProperty(
-            "--mouse-x",
-            x + "px"
-        );
-
-
-        card.style.setProperty(
-            "--mouse-y",
-            y + "px"
-        );
-
-
-    });
-
-
-
-    card.addEventListener("mouseleave",()=>{
-
-
-        card.style.removeProperty("--mouse-x");
-
-        card.style.removeProperty("--mouse-y");
+        card.style.transition =
+        ".4s";
 
 
     });
@@ -222,54 +210,51 @@ cards.forEach(card=>{
 
 
 
+
 // ================================
-// Portfolio afbeelding klik effect
+// Formulier bevestiging
 // ================================
 
 
-const portfolioItems =
-document.querySelectorAll(".portfolio-item");
+const form =
+document.querySelector("form");
 
 
-
-portfolioItems.forEach(item=>{
-
-
-    item.addEventListener("click",()=>{
+if(form){
 
 
-        item.classList.toggle("active");
+    form.addEventListener("submit",()=>{
+
+
+        const button =
+        form.querySelector("button");
+
+
+        if(button){
+
+
+            button.innerHTML =
+            "Aanvraag wordt verzonden...";
+
+
+            button.style.opacity =
+            "0.7";
+
+
+        }
 
 
     });
 
 
-});
+}
 
-
-
-
-// ================================
-// Lazy loading afbeeldingen
-// ================================
-
-
-document.querySelectorAll("img").forEach(img=>{
-
-
-    img.setAttribute(
-        "loading",
-        "lazy"
-    );
-
-
-});
 
 
 
 
 // ================================
-// Page load animatie
+// Pagina laad animatie
 // ================================
 
 
