@@ -3,7 +3,6 @@
 ===================================================== */
 
 
-
 /* ================================
    SUPABASE CONNECTION
 ================================ */
@@ -12,7 +11,7 @@
 const SUPABASE_URL = "https://zfkpevglwoeruwhulksg.supabase.co";
 
 
-const SUPABASE_KEY = "HIER_JOUW_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_hFo-TwUV0nfbok5hh62QIg_ohLSry9Y";
 
 
 const supabaseClient = supabase.createClient(
@@ -34,27 +33,21 @@ const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
 
+    if (navbar) {
 
-    if(navbar){
-
-
-        if(window.scrollY > 50){
+        if (window.scrollY > 50) {
 
             navbar.style.boxShadow =
             "0 20px 50px rgba(0,0,0,0.08)";
 
-
         } else {
-
 
             navbar.style.boxShadow =
             "none";
 
-
         }
 
     }
-
 
 });
 
@@ -69,9 +62,7 @@ window.addEventListener("scroll", () => {
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
-
-    link.addEventListener("click", function(e){
-
+    link.addEventListener("click", function(e) {
 
         const target =
         document.querySelector(
@@ -79,24 +70,17 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         );
 
 
-        if(target){
-
+        if (target) {
 
             e.preventDefault();
 
-
             target.scrollIntoView({
-
-                behavior:"smooth"
-
+                behavior: "smooth"
             });
-
 
         }
 
-
     });
-
 
 });
 
@@ -119,28 +103,26 @@ const elements = document.querySelectorAll(
 
 elements.forEach(element => {
 
-
     element.style.opacity = "0";
 
     element.style.transform =
     "translateY(40px)";
 
-
     element.style.transition =
     "all .8s ease";
-
 
 });
 
 
 
-const reveal = new IntersectionObserver((entries)=>{
+
+const reveal = new IntersectionObserver((entries) => {
 
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
 
             entry.target.style.opacity = "1";
@@ -156,19 +138,17 @@ const reveal = new IntersectionObserver((entries)=>{
     });
 
 
-},{
+}, {
 
-    threshold:0.15
+    threshold: 0.15
 
 });
 
 
 
-elements.forEach(element=>{
-
+elements.forEach(element => {
 
     reveal.observe(element);
-
 
 });
 
@@ -186,10 +166,10 @@ document.querySelector(".image-card img");
 
 
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
 
-    if(heroImage){
+    if (heroImage) {
 
 
         let movement =
@@ -219,7 +199,7 @@ document.querySelector("footer small");
 
 
 
-if(footerYear){
+if (footerYear) {
 
 
     footerYear.textContent =
@@ -244,10 +224,10 @@ document.querySelector("form");
 
 
 
-if(offerteForm){
+if (offerteForm) {
 
 
-    offerteForm.addEventListener("submit", async (e)=>{
+    offerteForm.addEventListener("submit", async (e) => {
 
 
         e.preventDefault();
@@ -259,18 +239,16 @@ if(offerteForm){
 
 
 
-        if(button){
-
+        if (button) {
 
             button.innerHTML =
             "Verzenden...";
 
-
             button.style.opacity =
             "0.7";
 
-
         }
+
 
 
 
@@ -292,6 +270,7 @@ if(offerteForm){
 
         const bericht =
         document.querySelector('[name="bericht"]').value;
+
 
 
 
@@ -321,19 +300,21 @@ if(offerteForm){
 
 
 
-        if(error){
+
+        if (error) {
 
 
-            console.error(error);
+            console.error("Supabase fout:", error);
+
 
 
             alert(
-                "Er ging iets fout. Probeer opnieuw."
+                "Er ging iets fout. Controleer je gegevens."
             );
 
 
 
-            if(button){
+            if (button) {
 
                 button.innerHTML =
                 "Versturen";
@@ -344,22 +325,23 @@ if(offerteForm){
             }
 
 
-        }
+        } 
+        
+        else {
 
-
-        else{
 
 
             alert(
-                "Bedankt! Je aanvraag is ontvangen."
+                "Bedankt! Je aanvraag is succesvol verzonden."
             );
+
 
 
             offerteForm.reset();
 
 
 
-            if(button){
+            if (button) {
 
                 button.innerHTML =
                 "Verstuurd ✓";
@@ -368,7 +350,6 @@ if(offerteForm){
 
 
         }
-
 
 
     });
@@ -390,10 +371,10 @@ document.querySelectorAll(".project");
 
 
 
-projects.forEach(project=>{
+projects.forEach(project => {
 
 
-    project.addEventListener("mousemove",(e)=>{
+    project.addEventListener("mousemove", (e) => {
 
 
         const rect =
@@ -411,12 +392,14 @@ projects.forEach(project=>{
 
 
 
+
+
         project.style.transform =
 
         `
         perspective(900px)
-        rotateX(${-(y - rect.height/2)/40}deg)
-        rotateY(${(x - rect.width/2)/40}deg)
+        rotateX(${-(y - rect.height / 2) / 40}deg)
+        rotateY(${(x - rect.width / 2) / 40}deg)
         scale(1.03)
         `;
 
@@ -426,7 +409,8 @@ projects.forEach(project=>{
 
 
 
-    project.addEventListener("mouseleave",()=>{
+
+    project.addEventListener("mouseleave", () => {
 
 
         project.style.transform =
@@ -447,10 +431,11 @@ projects.forEach(project=>{
 ================================ */
 
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
 
-    document.body.style.opacity = "1";
+    document.body.style.opacity =
+    "1";
 
 
 });
