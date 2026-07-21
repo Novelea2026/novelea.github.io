@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="nl">
 
@@ -6,17 +7,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>WebDesign Studio | Professionele Websites op Maat</title>
+    <title>WebDesign Studio | Premium Websites voor Ondernemers</title>
 
     <meta name="description"
-        content="Professionele websites voor ondernemers. Modern design, snel, mobielvriendelijk en gericht op meer klanten.">
+        content="Professionele websites met een premium uitstraling. Snel, modern en volledig op maat gemaakt.">
 
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -27,19 +30,26 @@
 <nav class="navbar">
 
     <a href="#" class="logo">
-        <img src="images/logo.png" alt="WebDesign Studio">
+
+        <!-- Vervang deze link door jouw logo -->
+        <img src="https://via.placeholder.com/180x55?text=LOGO" alt="Logo">
+
     </a>
 
-    <ul>
+    <ul class="nav-links">
 
         <li><a href="#diensten">Diensten</a></li>
-        <li><a href="#over">Over</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#over">Over</a></li>
         <li><a href="#reviews">Reviews</a></li>
 
     </ul>
 
-    <a href="#contact" class="nav-btn">Gratis Offerte</a>
+    <a href="#contact" class="nav-btn">
+
+        Gratis Offerte
+
+    </a>
 
 </nav>
 
@@ -47,93 +57,88 @@
 
 <header class="hero">
 
-    <div class="hero-left">
+    <div class="hero-text">
 
         <span class="badge">
-            Premium Webdesign voor ondernemers
+
+            Premium Webdesign
+
         </span>
 
         <h1>
-            Websites die vertrouwen uitstralen én klanten opleveren.
+
+            Websites die net zo sterk presteren
+            als ze eruitzien.
+
         </h1>
 
         <p>
 
-            Wij ontwerpen moderne websites die snel laden,
-            professioneel ogen en volledig zijn geoptimaliseerd
-            voor mobiel, Google en conversie.
+            Moderne websites voor ondernemers die
+            snelheid, vertrouwen en luxe uitstralen.
+            Ontworpen om bezoekers om te zetten
+            in klanten.
 
         </p>
 
         <div class="hero-buttons">
 
-            <a href="#contact" class="cta-button">
+            <a href="#contact" class="primary-btn">
+
                 Gratis Offerte
+
             </a>
 
-            <a href="#portfolio" class="secondary-button">
+            <a href="#portfolio" class="secondary-btn">
+
                 Bekijk Portfolio
+
             </a>
-
-        </div>
-
-        <div class="stats">
-
-            <div>
-
-                <h3>50+</h3>
-
-                <span>Websites</span>
-
-            </div>
-
-            <div>
-
-                <h3>100%</h3>
-
-                <span>Maatwerk</span>
-
-            </div>
-
-            <div>
-
-                <h3>24/7</h3>
-
-                <span>Support</span>
-
-            </div>
 
         </div>
 
     </div>
 
-    <div class="hero-right">
+    <div class="hero-image">
 
-        <div class="mockup">
+        <!-- Hier kun je later een laptop/mockup neerzetten -->
 
-            <div class="browser-bar">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </div>
-
-            <div class="mockup-content">
-
-                <h2>Jouw Website</h2>
-
-                <p>Modern • Luxe • Responsive</p>
-
-                <div class="mockup-box"></div>
-
-            </div>
-
-        </div>
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=900"
+            alt="Website Mockup">
 
     </div>
 
 </header>
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+    <div>
+
+        <h2>50+</h2>
+
+        <p>Websites gebouwd</p>
+
+    </div>
+
+    <div>
+
+        <h2>100%</h2>
+
+        <p>Maatwerk</p>
+
+    </div>
+
+    <div>
+
+        <h2>24/7</h2>
+
+        <p>Support</p>
+
+    </div>
+
+</section>
 
 <!-- ================= DIENSTEN ================= -->
 
@@ -141,40 +146,76 @@
 
     <h2>Onze Diensten</h2>
 
+    <p class="section-text">
+
+        Alles wat jouw bedrijf nodig heeft om online professioneel voor de dag te komen.
+
+    </p>
+
     <div class="cards">
 
-        <div class="card">
+        <article class="card">
 
-            <h3>🌐 Bedrijfswebsite</h3>
+            <h3>Bedrijfswebsite</h3>
 
             <p>
+
                 Een professionele website die vertrouwen uitstraalt
-                en bezoekers omzet in klanten.
+                en bezoekers overtuigt.
+
             </p>
 
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
 
-            <h3>🚀 Landing Pages</h3>
+            <h3>Landing Pages</h3>
 
             <p>
-                Hogere conversie dankzij slimme ontwerpen
-                en duidelijke call-to-actions.
+
+                Pagina's die zijn ontworpen om zoveel mogelijk
+                aanvragen te genereren.
+
             </p>
 
-        </div>
+        </article>
 
-        <div class="card">
+        <article class="card">
 
-            <h3>📱 Responsive Design</h3>
+            <h3>Responsive Design</h3>
 
             <p>
+
                 Perfect werkend op mobiel,
-                tablet én desktop.
+                tablet en desktop.
+
             </p>
 
-        </div>
+        </article>
+
+    </div>
+
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+
+<section id="portfolio">
+
+    <h2>Recent Werk</h2>
+
+    <p class="section-text">
+
+        Een selectie van moderne websites met een premium uitstraling.
+
+    </p>
+
+    <div class="portfolio-grid">
+
+        <div class="portfolio-item"></div>
+
+        <div class="portfolio-item"></div>
+
+        <div class="portfolio-item"></div>
 
     </div>
 
@@ -184,37 +225,42 @@
 
 <section id="over">
 
-    <h2>Waarom kiezen voor WebDesign Studio?</h2>
+    <div class="about">
 
-    <p>
+        <div class="about-image">
 
-        Wij bouwen snelle, moderne en professionele websites die
-        niet alleen mooi zijn, maar ook zorgen voor meer aanvragen,
-        betere vindbaarheid en een sterke online uitstraling.
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900"
+                alt="Over ons">
 
-    </p>
+        </div>
 
-</section>
+        <div class="about-text">
 
-<!-- ================= PORTFOLIO ================= -->
+            <span class="badge">
 
-<section id="portfolio">
+                Over WebDesign Studio
 
-    <h2>Wat kun je verwachten?</h2>
+            </span>
 
-    <div class="features">
+            <h2>
 
-        <div>Professioneel ontwerp</div>
+                Premium webdesign
+                zonder compromissen.
 
-        <div>SEO Geoptimaliseerd</div>
+            </h2>
 
-        <div>Supersnelle laadtijd</div>
+            <p>
 
-        <div>Mobielvriendelijk</div>
+                Wij ontwerpen snelle,
+                minimalistische websites
+                die perfect aansluiten bij jouw merk.
 
-        <div>Veilig & Betrouwbaar</div>
+                Geen standaard templates,
+                maar volledig maatwerk.
 
-        <div>Persoonlijke Support</div>
+            </p>
+
+        </div>
 
     </div>
 
@@ -224,55 +270,97 @@
 
 <section id="reviews">
 
-    <h2>Klantenervaringen</h2>
+    <h2>Wat klanten zeggen</h2>
 
     <div class="cards">
 
-        <div class="card">
+        <article class="card">
 
             ⭐⭐⭐⭐⭐
 
             <p>
 
-                "Binnen twee weken stond onze nieuwe website online.
-                Super professioneel."
+                "Professioneel, snel en ontzettend mooi ontwerp."
 
             </p>
 
-            <strong>— Lokale ondernemer</strong>
+            <strong>
 
-        </div>
+                — Lokale ondernemer
 
-        <div class="card">
+            </strong>
+
+        </article>
+
+        <article class="card">
 
             ⭐⭐⭐⭐⭐
 
             <p>
 
-                "Onze omzet via de website is flink gestegen.
-                Absoluut een aanrader."
+                "Onze website voelt eindelijk premium."
 
             </p>
 
-            <strong>— ZZP'er</strong>
+            <strong>
 
-        </div>
+                — ZZP'er
+
+            </strong>
+
+        </article>
+
+        <article class="card">
+
+            ⭐⭐⭐⭐⭐
+
+            <p>
+
+                "Meer aanvragen sinds onze nieuwe website."
+
+            </p>
+
+            <strong>
+
+                — Marketingbureau
+
+            </strong>
+
+        </article>
 
     </div>
 
 </section>
 
-<!-- ================= CONTACT ================= -->
+<!-- ================= CTA ================= -->
 
-<section id="contact" class="contact">
+<section class="cta">
 
-    <h2>Vraag vrijblijvend een offerte aan</h2>
+    <h2>
+
+        Klaar voor een professionele website?
+
+    </h2>
 
     <p>
 
-        Binnen 24 uur ontvang je een reactie.
+        Vraag vandaag nog vrijblijvend een offerte aan.
 
     </p>
+
+    <a href="#contact" class="primary-btn">
+
+        Offerte aanvragen
+
+    </a>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+    <h2>Neem contact op</h2>
 
     <form action="https://formspree.io/f/xkodzbvd" method="POST">
 
@@ -280,15 +368,14 @@
 
         <input type="email" name="email" placeholder="E-mailadres" required>
 
-        <input type="text" name="bedrijf" placeholder="Bedrijfsnaam">
+        <input type="text" name="bedrijf" placeholder="Bedrijf">
 
-        <textarea
-            name="bericht"
+        <textarea name="bericht"
             placeholder="Vertel iets over jouw project"></textarea>
 
         <button type="submit">
 
-            Offerte Aanvragen
+            Verstuur aanvraag
 
         </button>
 
@@ -300,23 +387,19 @@
 
 <footer>
 
-    <div class="footer-content">
+    <img src="https://via.placeholder.com/180x55?text=LOGO" alt="Logo">
 
-        <img src="images/logo.png" alt="Logo">
+    <p>
 
-        <p>
+        Premium websites voor ondernemers.
 
-            Professionele websites voor ondernemers.
+    </p>
 
-        </p>
+    <small>
 
-        <small>
+        © 2026 WebDesign Studio
 
-            © 2026 WebDesign Studio
-
-        </small>
-
-    </div>
+    </small>
 
 </footer>
 
@@ -325,3 +408,4 @@
 </body>
 
 </html>
+```
