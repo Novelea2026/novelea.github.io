@@ -3,8 +3,29 @@
 ===================================================== */
 
 
+
 /* ================================
-   NAVBAR SCROLL EFFECT
+   SUPABASE CONNECTION
+================================ */
+
+
+const SUPABASE_URL = "https://zfkpevglwoeruwhulksg.supabase.co";
+
+
+const SUPABASE_KEY = "HIER_JOUW_PUBLISHABLE_KEY";
+
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+
+
+
+/* ================================
+   NAVBAR EFFECT
 ================================ */
 
 
@@ -13,16 +34,27 @@ const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 40) {
 
-        navbar.style.boxShadow =
-        "0 20px 50px rgba(0,0,0,0.08)";
+    if(navbar){
 
-    } else {
 
-        navbar.style.boxShadow = "none";
+        if(window.scrollY > 50){
+
+            navbar.style.boxShadow =
+            "0 20px 50px rgba(0,0,0,0.08)";
+
+
+        } else {
+
+
+            navbar.style.boxShadow =
+            "none";
+
+
+        }
 
     }
+
 
 });
 
@@ -49,6 +81,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
         if(target){
 
+
             e.preventDefault();
 
 
@@ -57,6 +90,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
                 behavior:"smooth"
 
             });
+
 
         }
 
@@ -71,28 +105,28 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 
 /* ================================
-   FADE IN ANIMATIONS
+   SCROLL ANIMATIONS
 ================================ */
 
 
-const revealItems = document.querySelectorAll(
+const elements = document.querySelectorAll(
 
-    "section, .services article, .usp div, .project, .review-grid article"
+    ".usp div, .services article, .project, .review-grid article, .about"
 
 );
 
 
 
-revealItems.forEach(item => {
+elements.forEach(element => {
 
 
-    item.style.opacity = "0";
+    element.style.opacity = "0";
 
-    item.style.transform =
+    element.style.transform =
     "translateY(40px)";
 
 
-    item.style.transition =
+    element.style.transition =
     "all .8s ease";
 
 
@@ -100,8 +134,7 @@ revealItems.forEach(item => {
 
 
 
-
-const observer = new IntersectionObserver((entries)=>{
+const reveal = new IntersectionObserver((entries)=>{
 
 
     entries.forEach(entry=>{
@@ -110,10 +143,10 @@ const observer = new IntersectionObserver((entries)=>{
         if(entry.isIntersecting){
 
 
-            entry.target.style.opacity="1";
+            entry.target.style.opacity = "1";
 
 
-            entry.target.style.transform=
+            entry.target.style.transform =
             "translateY(0)";
 
 
@@ -125,17 +158,17 @@ const observer = new IntersectionObserver((entries)=>{
 
 },{
 
-
     threshold:0.15
-
 
 });
 
 
 
-revealItems.forEach(item=>{
+elements.forEach(element=>{
 
-    observer.observe(item);
+
+    reveal.observe(element);
+
 
 });
 
@@ -159,12 +192,12 @@ window.addEventListener("scroll",()=>{
     if(heroImage){
 
 
-        let offset =
-        window.scrollY * 0.05;
+        let movement =
+        window.scrollY * 0.04;
 
 
         heroImage.style.transform =
-        `translateY(${offset}px)`;
+        `translateY(${movement}px)`;
 
 
     }
@@ -181,15 +214,15 @@ window.addEventListener("scroll",()=>{
 ================================ */
 
 
-const footerDate =
+const footerYear =
 document.querySelector("footer small");
 
 
 
-if(footerDate){
+if(footerYear){
 
 
-    footerDate.textContent =
+    footerYear.textContent =
     "© " +
     new Date().getFullYear() +
     " Novelea";
@@ -202,23 +235,28 @@ if(footerDate){
 
 
 /* ================================
-   CONTACT FORM EFFECT
+   SUPABASE OFFERTE FORMULIER
 ================================ */
 
 
-const form =
+const offerteForm =
 document.querySelector("form");
 
 
 
-if(form){
+if(offerteForm){
 
 
-    form.addEventListener("submit",()=>{
+    offerteForm.addEventListener("submit", async (e)=>{
+
+
+        e.preventDefault();
+
 
 
         const button =
-        form.querySelector("button");
+        offerteForm.querySelector("button");
+
 
 
         if(button){
@@ -235,6 +273,104 @@ if(form){
         }
 
 
+
+
+        const naam =
+        document.querySelector('[name="naam"]').value;
+
+
+
+        const email =
+        document.querySelector('[name="email"]').value;
+
+
+
+        const bedrijf =
+        document.querySelector('[name="bedrijf"]').value;
+
+
+
+        const bericht =
+        document.querySelector('[name="bericht"]').value;
+
+
+
+
+
+        const { error } = await supabaseClient
+
+            .from("offertes")
+
+            .insert([
+
+                {
+
+                    naam: naam,
+
+                    email: email,
+
+                    bedrijf: bedrijf,
+
+                    bericht: bericht
+
+                }
+
+            ]);
+
+
+
+
+
+        if(error){
+
+
+            console.error(error);
+
+
+            alert(
+                "Er ging iets fout. Probeer opnieuw."
+            );
+
+
+
+            if(button){
+
+                button.innerHTML =
+                "Versturen";
+
+                button.style.opacity =
+                "1";
+
+            }
+
+
+        }
+
+
+        else{
+
+
+            alert(
+                "Bedankt! Je aanvraag is ontvangen."
+            );
+
+
+            offerteForm.reset();
+
+
+
+            if(button){
+
+                button.innerHTML =
+                "Verstuurd ✓";
+
+            }
+
+
+        }
+
+
+
     });
 
 
@@ -245,7 +381,7 @@ if(form){
 
 
 /* ================================
-   MOUSE PREMIUM EFFECT
+   PROJECT HOVER EFFECT
 ================================ */
 
 
@@ -264,8 +400,10 @@ projects.forEach(project=>{
         project.getBoundingClientRect();
 
 
+
         const x =
         e.clientX - rect.left;
+
 
 
         const y =
@@ -276,14 +414,15 @@ projects.forEach(project=>{
         project.style.transform =
 
         `
-        perspective(800px)
-        rotateX(${-(y-rect.height/2)/30}deg)
-        rotateY(${(x-rect.width/2)/30}deg)
+        perspective(900px)
+        rotateX(${-(y - rect.height/2)/40}deg)
+        rotateY(${(x - rect.width/2)/40}deg)
         scale(1.03)
         `;
 
 
     });
+
 
 
 
@@ -304,14 +443,14 @@ projects.forEach(project=>{
 
 
 /* ================================
-   PAGE LOAD EFFECT
+   PAGE LOAD
 ================================ */
 
 
 window.addEventListener("load",()=>{
 
 
-    document.body.style.opacity="1";
+    document.body.style.opacity = "1";
 
 
 });
