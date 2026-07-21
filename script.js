@@ -1,25 +1,26 @@
-/*====================================================
-   NOVELEA
-   Premium Website JavaScript
-====================================================*/
+/* =====================================================
+   NOVELEA - PREMIUM WEBSITE SCRIPT
+===================================================== */
 
 
-// ================================
-// Navbar scroll effect
-// ================================
+/* ================================
+   NAVBAR SCROLL EFFECT
+================================ */
+
 
 const navbar = document.querySelector(".navbar");
 
 
 window.addEventListener("scroll", () => {
 
-    if (window.scrollY > 50) {
+    if (window.scrollY > 40) {
 
-        navbar.classList.add("scrolled");
+        navbar.style.boxShadow =
+        "0 20px 50px rgba(0,0,0,0.08)";
 
     } else {
 
-        navbar.classList.remove("scrolled");
+        navbar.style.boxShadow = "none";
 
     }
 
@@ -28,15 +29,20 @@ window.addEventListener("scroll", () => {
 
 
 
-// ================================
-// Smooth scrolling
-// ================================
+
+/* ================================
+   SMOOTH SCROLL
+================================ */
+
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
+
     link.addEventListener("click", function(e){
 
-        const target = document.querySelector(
+
+        const target =
+        document.querySelector(
             this.getAttribute("href")
         );
 
@@ -44,6 +50,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         if(target){
 
             e.preventDefault();
+
 
             target.scrollIntoView({
 
@@ -53,41 +60,48 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
         }
 
+
     });
+
 
 });
 
 
 
 
-// ================================
-// Scroll reveal animaties
-// ================================
+
+/* ================================
+   FADE IN ANIMATIONS
+================================ */
 
 
-const animatedElements = document.querySelectorAll(
+const revealItems = document.querySelectorAll(
 
-    ".card, .stats div, .portfolio-item, .about, .cta, form"
+    "section, .services article, .usp div, .project, .review-grid article"
 
 );
 
 
 
-animatedElements.forEach(element => {
+revealItems.forEach(item => {
 
-    element.style.opacity = "0";
 
-    element.style.transform =
+    item.style.opacity = "0";
+
+    item.style.transform =
     "translateY(40px)";
 
-    element.style.transition =
+
+    item.style.transition =
     "all .8s ease";
+
 
 });
 
 
 
-const revealObserver = new IntersectionObserver((entries)=>{
+
+const observer = new IntersectionObserver((entries)=>{
 
 
     entries.forEach(entry=>{
@@ -97,6 +111,7 @@ const revealObserver = new IntersectionObserver((entries)=>{
 
 
             entry.target.style.opacity="1";
+
 
             entry.target.style.transform=
             "translateY(0)";
@@ -110,28 +125,32 @@ const revealObserver = new IntersectionObserver((entries)=>{
 
 },{
 
+
     threshold:0.15
 
-});
-
-
-
-animatedElements.forEach(element=>{
-
-    revealObserver.observe(element);
 
 });
 
 
 
+revealItems.forEach(item=>{
+
+    observer.observe(item);
+
+});
 
 
-// ================================
-// Hero parallax effect
-// ================================
 
 
-const heroImage = document.querySelector(".hero-image img");
+
+/* ================================
+   HERO IMAGE PARALLAX
+================================ */
+
+
+const heroImage =
+document.querySelector(".image-card img");
+
 
 
 window.addEventListener("scroll",()=>{
@@ -140,12 +159,12 @@ window.addEventListener("scroll",()=>{
     if(heroImage){
 
 
-        const movement =
-        window.scrollY * 0.08;
+        let offset =
+        window.scrollY * 0.05;
 
 
         heroImage.style.transform =
-        `translateY(${movement}px)`;
+        `translateY(${offset}px)`;
 
 
     }
@@ -157,19 +176,20 @@ window.addEventListener("scroll",()=>{
 
 
 
-// ================================
-// Footer automatisch jaartal
-// ================================
+/* ================================
+   FOOTER JAARTAL
+================================ */
 
 
-const footerYear =
+const footerDate =
 document.querySelector("footer small");
 
 
-if(footerYear){
+
+if(footerDate){
 
 
-    footerYear.textContent =
+    footerDate.textContent =
     "© " +
     new Date().getFullYear() +
     " Novelea";
@@ -181,43 +201,14 @@ if(footerYear){
 
 
 
-// ================================
-// Luxe kaart hover effect
-// ================================
-
-
-const cards =
-document.querySelectorAll(".card");
-
-
-
-cards.forEach(card=>{
-
-
-    card.addEventListener("mouseenter",()=>{
-
-
-        card.style.transition =
-        ".4s";
-
-
-    });
-
-
-
-});
-
-
-
-
-
-// ================================
-// Formulier bevestiging
-// ================================
+/* ================================
+   CONTACT FORM EFFECT
+================================ */
 
 
 const form =
 document.querySelector("form");
+
 
 
 if(form){
@@ -234,7 +225,7 @@ if(form){
 
 
             button.innerHTML =
-            "Aanvraag wordt verzonden...";
+            "Verzenden...";
 
 
             button.style.opacity =
@@ -253,15 +244,74 @@ if(form){
 
 
 
-// ================================
-// Pagina laad animatie
-// ================================
+/* ================================
+   MOUSE PREMIUM EFFECT
+================================ */
+
+
+const projects =
+document.querySelectorAll(".project");
+
+
+
+projects.forEach(project=>{
+
+
+    project.addEventListener("mousemove",(e)=>{
+
+
+        const rect =
+        project.getBoundingClientRect();
+
+
+        const x =
+        e.clientX - rect.left;
+
+
+        const y =
+        e.clientY - rect.top;
+
+
+
+        project.style.transform =
+
+        `
+        perspective(800px)
+        rotateX(${-(y-rect.height/2)/30}deg)
+        rotateY(${(x-rect.width/2)/30}deg)
+        scale(1.03)
+        `;
+
+
+    });
+
+
+
+    project.addEventListener("mouseleave",()=>{
+
+
+        project.style.transform =
+        "scale(1)";
+
+
+    });
+
+
+});
+
+
+
+
+
+/* ================================
+   PAGE LOAD EFFECT
+================================ */
 
 
 window.addEventListener("load",()=>{
 
 
-    document.body.classList.add("loaded");
+    document.body.style.opacity="1";
 
 
 });
