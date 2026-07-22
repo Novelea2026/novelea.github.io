@@ -10,14 +10,30 @@
 
 const SUPABASE_URL = "https://zfkpevglwoeruwhulksg.supabase.co";
 
-
 const SUPABASE_KEY = "sb_publishable_hFo-TwUV0nfbok5hh62QIg_ohLSry9Y";
 
 
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+let supabaseClient = null;
+
+
+if (window.supabase) {
+
+
+    supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+} else {
+
+
+    console.error(
+        "Supabase is niet geladen."
+    );
+
+
+}
 
 
 
@@ -33,23 +49,33 @@ const navbar = document.querySelector(".navbar");
 
 window.addEventListener("scroll", () => {
 
-    if (navbar) {
 
-        if (window.scrollY > 50) {
+    if(navbar){
+
+
+        if(window.scrollY > 40){
+
 
             navbar.style.boxShadow =
-            "0 20px 50px rgba(0,0,0,0.08)";
+            "0 20px 50px rgba(0,0,0,0.10)";
+
 
         } else {
+
 
             navbar.style.boxShadow =
             "none";
 
+
         }
+
 
     }
 
+
 });
+
+
 
 
 
@@ -62,7 +88,9 @@ window.addEventListener("scroll", () => {
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
-    link.addEventListener("click", function(e) {
+
+    link.addEventListener("click", function(e){
+
 
         const target =
         document.querySelector(
@@ -70,19 +98,28 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         );
 
 
-        if (target) {
+        if(target){
+
 
             e.preventDefault();
 
+
             target.scrollIntoView({
-                behavior: "smooth"
+
+                behavior:"smooth"
+
             });
+
 
         }
 
+
     });
 
+
 });
+
+
 
 
 
@@ -95,34 +132,50 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 const elements = document.querySelectorAll(
 
-    ".usp div, .services article, .project, .review-grid article, .about"
+`
+.usp div,
+.services article,
+.project,
+.about,
+.process-card,
+.price-card,
+.guarantee-grid div
+`
 
 );
 
 
 
+
 elements.forEach(element => {
 
+
     element.style.opacity = "0";
+
 
     element.style.transform =
     "translateY(40px)";
 
+
     element.style.transition =
     "all .8s ease";
+
 
 });
 
 
 
 
-const reveal = new IntersectionObserver((entries) => {
+
+const observer = new IntersectionObserver(
+
+(entries)=>{
 
 
-    entries.forEach(entry => {
+    entries.forEach(entry=>{
 
 
-        if (entry.isIntersecting) {
+        if(entry.isIntersecting){
 
 
             entry.target.style.opacity = "1";
@@ -138,19 +191,29 @@ const reveal = new IntersectionObserver((entries) => {
     });
 
 
-}, {
+},
 
-    threshold: 0.15
+{
+
+threshold:0.15
+
+}
+
+);
+
+
+
+
+
+elements.forEach(element=>{
+
+
+    observer.observe(element);
+
 
 });
 
 
-
-elements.forEach(element => {
-
-    reveal.observe(element);
-
-});
 
 
 
@@ -166,14 +229,14 @@ document.querySelector(".image-card img");
 
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
 
 
-    if (heroImage) {
+    if(heroImage){
 
 
-        let movement =
-        window.scrollY * 0.04;
+        const movement =
+        window.scrollY * 0.035;
 
 
         heroImage.style.transform =
@@ -189,8 +252,10 @@ window.addEventListener("scroll", () => {
 
 
 
+
+
 /* ================================
-   FOOTER JAARTAL
+   FOOTER YEAR
 ================================ */
 
 
@@ -199,7 +264,7 @@ document.querySelector("footer small");
 
 
 
-if (footerYear) {
+if(footerYear){
 
 
     footerYear.textContent =
@@ -214,8 +279,10 @@ if (footerYear) {
 
 
 
+
+
 /* ================================
-   SUPABASE OFFERTE FORMULIER
+   OFFERTE FORMULIER
 ================================ */
 
 
@@ -224,10 +291,14 @@ document.querySelector("form");
 
 
 
-if (offerteForm) {
+if(offerteForm){
 
 
-    offerteForm.addEventListener("submit", async (e) => {
+    offerteForm.addEventListener(
+
+    "submit",
+
+    async(e)=>{
 
 
         e.preventDefault();
@@ -239,13 +310,15 @@ if (offerteForm) {
 
 
 
-        if (button) {
+        if(button){
+
 
             button.innerHTML =
             "Verzenden...";
 
-            button.style.opacity =
-            "0.7";
+
+            button.disabled = true;
+
 
         }
 
@@ -257,15 +330,12 @@ if (offerteForm) {
         document.querySelector('[name="naam"]').value;
 
 
-
         const email =
         document.querySelector('[name="email"]').value;
 
 
-
         const bedrijf =
         document.querySelector('[name="bedrijf"]').value;
-
 
 
         const bericht =
@@ -275,64 +345,85 @@ if (offerteForm) {
 
 
 
-
-        const { error } = await supabaseClient
-
-            .from("offertes")
-
-            .insert([
-
-                {
-
-                    naam: naam,
-
-                    email: email,
-
-                    bedrijf: bedrijf,
-
-                    bericht: bericht
-
-                }
-
-            ]);
-
-
-
-
-
-
-        if (error) {
-
-
-            console.error("Supabase fout:", error);
-
+        if(!supabaseClient){
 
 
             alert(
-                "Er ging iets fout. Controleer je gegevens."
+            "Er is een probleem met de verbinding."
+            );
+
+
+            return;
+
+
+        }
+
+
+
+
+
+        const {error} = await supabaseClient
+
+        .from("offertes")
+
+        .insert([
+
+        {
+
+            naam:naam,
+
+            email:email,
+
+            bedrijf:bedrijf,
+
+            bericht:bericht
+
+        }
+
+        ]);
+
+
+
+
+
+
+
+        if(error){
+
+
+            console.error(
+                "Supabase fout:",
+                error
             );
 
 
 
-            if (button) {
+            alert(
+            "Er ging iets mis. Probeer opnieuw."
+            );
+
+
+
+            if(button){
+
 
                 button.innerHTML =
                 "Versturen";
 
-                button.style.opacity =
-                "1";
+
+                button.disabled=false;
+
 
             }
 
 
-        } 
-        
-        else {
+        }
 
+        else{
 
 
             alert(
-                "Bedankt! Je aanvraag is succesvol verzonden."
+            "Bedankt! We nemen snel contact met je op."
             );
 
 
@@ -341,10 +432,12 @@ if (offerteForm) {
 
 
 
-            if (button) {
+            if(button){
+
 
                 button.innerHTML =
                 "Verstuurd ✓";
+
 
             }
 
@@ -352,10 +445,13 @@ if (offerteForm) {
         }
 
 
+
     });
 
 
 }
+
+
 
 
 
@@ -371,10 +467,14 @@ document.querySelectorAll(".project");
 
 
 
-projects.forEach(project => {
+projects.forEach(project=>{
 
 
-    project.addEventListener("mousemove", (e) => {
+    project.addEventListener(
+
+    "mousemove",
+
+    (e)=>{
 
 
         const rect =
@@ -398,8 +498,8 @@ projects.forEach(project => {
 
         `
         perspective(900px)
-        rotateX(${-(y - rect.height / 2) / 40}deg)
-        rotateY(${(x - rect.width / 2) / 40}deg)
+        rotateX(${-(y - rect.height/2)/45}deg)
+        rotateY(${(x - rect.width/2)/45}deg)
         scale(1.03)
         `;
 
@@ -408,9 +508,11 @@ projects.forEach(project => {
 
 
 
+    project.addEventListener(
 
+    "mouseleave",
 
-    project.addEventListener("mouseleave", () => {
+    ()=>{
 
 
         project.style.transform =
@@ -426,16 +528,23 @@ projects.forEach(project => {
 
 
 
+
+
 /* ================================
    PAGE LOAD
 ================================ */
 
 
-window.addEventListener("load", () => {
+window.addEventListener(
+
+"load",
+
+()=>{
 
 
-    document.body.style.opacity =
-    "1";
+document.body.style.opacity="1";
 
 
-});
+}
+
+);
